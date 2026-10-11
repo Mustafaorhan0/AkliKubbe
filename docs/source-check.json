@@ -1,0 +1,223 @@
+{
+  "checkedAt": "2026-10-11T21:12:44.853Z",
+  "images": [
+    {
+      "word": "elma",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY 2.0"
+    },
+    {
+      "word": "ahududu",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "üzüm",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "ekmek",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "süt",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY 2.0"
+    },
+    {
+      "word": "kurabiye",
+      "available": true,
+      "compatible": true,
+      "license": "Public domain"
+    },
+    {
+      "word": "baharat",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "içecek",
+      "available": true,
+      "compatible": true,
+      "license": "CC0"
+    },
+    {
+      "word": "kedi",
+      "available": true,
+      "compatible": true,
+      "license": "CC0"
+    },
+    {
+      "word": "köpek",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 2.0"
+    },
+    {
+      "word": "at",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 2.0"
+    },
+    {
+      "word": "balık",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "ağaç",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY 2.5"
+    },
+    {
+      "word": "bitki",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "dağ",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY 4.0"
+    },
+    {
+      "word": "plaj",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY 4.0"
+    },
+    {
+      "word": "nehir",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 2.0"
+    },
+    {
+      "word": "göl",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "orman",
+      "available": true,
+      "compatible": true,
+      "license": "Public domain"
+    },
+    {
+      "word": "güneş",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "şelale",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "bisiklet",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "otobüs",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "denizaltı",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "kitap",
+      "available": true,
+      "compatible": true,
+      "license": "Public domain"
+    },
+    {
+      "word": "masa",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 4.0"
+    },
+    {
+      "word": "oyuncak",
+      "available": true,
+      "compatible": true,
+      "license": "Public domain"
+    },
+    {
+      "word": "fincan",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 2.0"
+    },
+    {
+      "word": "kasaba",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY-SA 3.0"
+    },
+    {
+      "word": "üniversite",
+      "available": true,
+      "compatible": true,
+      "license": "CC BY 2.5"
+    }
+  ],
+  "sentences": [
+    {
+      "word": "elma",
+      "groups": 30,
+      "threeLanguages": 8,
+      "cors": "*"
+    },
+    {
+      "word": "kedi",
+      "groups": 30,
+      "threeLanguages": 1,
+      "cors": "*"
+    },
+    {
+      "word": "ağaç",
+      "groups": 28,
+      "threeLanguages": 6,
+      "cors": "*"
+    },
+    {
+      "word": "denizaltı",
+      "groups": 18,
+      "threeLanguages": 5,
+      "cors": "*"
+    },
+    {
+      "word": "kitap",
+      "groups": 27,
+      "threeLanguages": 8,
+      "cors": "*"
+    },
+    {
+      "word": "fincan",
+      "groups": 19,
+      "threeLanguages": 6,
+      "cors": "*"
+    }
+  ]
+}
