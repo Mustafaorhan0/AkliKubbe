@@ -2,7 +2,7 @@
 
 İlk tanım: 8 Ekim 2026  
 Son güncelleme: 12 Ekim 2026  
-Durum: Çalışan web başlangıç sürümü; GitHub deposu ve Pages yayını hazırlanıyor. Google Play paketi henüz yayımlanmadı.  
+Durum: GitHub Pages üzerinde yayımlanmış, çalışan web başlangıç sürümü. Google Play paketi henüz yayımlanmadı.  
 Platform: PC ve telefon tarayıcıları; destekleyen tarayıcılarda kurulabilir PWA.  
 Arayüz: Türkçe  
 İçerik: Türkçe, İngilizce ve Almanca
@@ -127,6 +127,7 @@ Görsel/cümle hataları diğer öğrenme işlemlerini engellemez. Zaman aşım�
 - GitHub Pages benzeri `/AkliKubbe/` alt dizininden statik paket, canlı içerik, manifest ve service worker kapsamı yerelde doğrulandı.
 - Canlı elma görseli ve üç dilli Tatoeba cümlesi tarayıcıda doğrulandı.
 - PC ve 390 px telefon görünümünde 20 tarayıcı kontrolü geçti: sınıflandırma, geri alma, kalıcılık, taşıma, tekrar, arama, kaydırma, defter, yedek işlemleri, bozuk yedek, çevrimdışı yeniden açılış ve uzak görsellerin uygulama önbelleğine alınmaması.
+- 12 Ekim 2026: `https://mustafaorhan0.github.io/AkliKubbe/` HTTPS adresi HTTP 200 ile açıldı. Canlı görsel, üç dilli Tatoeba örneği, 390 px görünümde taşma olmaması ve service worker kapsamı yayın üzerinde doğrulandı.
 - Gerçek Android/iPhone cihazları, tüm tarayıcılar ve mağaza paketi henüz test edilmedi. Mobil kontroller tarayıcıda boyut benzetimiyle yapıldı.
 - İlk planın 100 kelimelik kapsam araştırması ve 500–1.000 kelimelik katalog tamamlanmadı.
 - Her kelimede üç dilde canlı cümle ve her eşleşmede doğru anlam garanti edilmez.
