@@ -1,0 +1,55 @@
+async(page)=>{
+ const results=[];
+ const check=async(name,pass)=>{results.push({name,passed:!!pass});await page.evaluate(value=>sessionStorage.setItem('aklikubbe-catalog-report',JSON.stringify(value)),results);if(!pass)throw new Error(name);};
+ await page.context().setOffline(false);await page.goto('http://localhost:4173/');
+ await page.evaluate(()=>localStorage.setItem('aklikubbe.v1',JSON.stringify({version:1,learning:{Q89:{status:'known',updatedAt:100},Q13179:{status:'unknown',updatedAt:100}},saved:[{id:'Q89:9191859',wordId:'Q89',savedAt:100,sentences:[{id:9191859,lang:'eng',text:'Mom bought apples.',owner:'CK',license:'CC BY 2.0 FR'}]}]})));
+ await page.reload();await page.setViewportSize({width:1440,height:1100});await page.waitForSelector('#deck');
+ await check('3000 kelimelik varsayılan katalog',await page.locator('.sidebar [data-nav="catalog"] .nav-count').innerText()==='3000');
+ await check('Eski öğrenme ve cümle kayıtları korunur',await page.evaluate(()=>{const x=JSON.parse(localStorage.getItem('aklikubbe.v1'));return x.learning.Q89.status==='known'&&x.learning.Q13179.status==='unknown'&&x.saved.length===1;}));
+ await check('25 kelimelik başlangıç oturumu',await page.locator('.session-heading').innerText().then(t=>t.includes('1 / 25')));
+ await check('İngilizce başlangıç kartı',await page.locator('.word-title h2').innerText()==='you');
+ await page.locator('#card-language').selectOption('tr');await check('Türkçe kart dili',await page.locator('.word-title h2').innerText()==='sen / siz');
+ await page.locator('#card-language').selectOption('de');await check('Almanca kart dili',await page.locator('.word-title h2').innerText().then(t=>t.includes('du')));
+ await page.locator('#card-language').selectOption('en');await page.locator('#flip').click();await page.waitForSelector('#save-sentence',{timeout:22000});
+ await check('Yeni dil bilgisi kelimesinde canlı cümle',await page.locator('.sentence-row').count()===3);
+ await page.locator('#save-sentence').click();await check('Yeni cümle eski deftere eklenir',await page.evaluate(()=>JSON.parse(localStorage.getItem('aklikubbe.v1')).saved.length===2));
+ await page.locator('#known').click();await check('Yeni kimliğe sınıflandırma',await page.evaluate(()=>JSON.parse(localStorage.getItem('aklikubbe.v1')).learning['en:you'].status==='known'));
+ await page.locator('#undo').click();await check('Geri alma eski kayıtları bozmaz',await page.evaluate(()=>{const x=JSON.parse(localStorage.getItem('aklikubbe.v1'));return !x.learning['en:you']&&x.learning.Q89.status==='known';}));
+ await page.locator('.sidebar [data-nav="catalog"]').click();await check('Katalogda 50 satır sınırı',await page.locator('.list-word').count()===50);
+ await page.locator('[data-page="2"]').click();await check('İkinci sayfa 51. kelimeden başlar',await page.locator('.list-word-icon').first().innerText()==='51');
+ await page.locator('#band').selectOption('6');await check('2501–3000 grubu 500 kelimedir',await page.locator('.collection-header').innerText().then(t=>t.startsWith('500 kelime')));
+ await check('Sıklık grubu sayfalamayı sıfırlar',await page.locator('.list-word-icon').first().innerText()==='2501');
+ await page.locator('#band').selectOption('all');await page.locator('#search').fill('elma');
+ await check('Türkçe arama mevcut İngilizce kartını bulur',await page.locator('[data-open="Q89"]').count()===1);
+ await page.locator('#search').fill('');await page.locator('#coverage').selectOption('complete');
+ const available=await page.locator('.collection-header').innerText();await check('TR + DE filtresi gerçek alt kümedir',parseInt(available)>1000&&parseInt(available)<3000);
+ await page.locator('#coverage').selectOption('all');await page.locator('.sidebar [data-nav="study"]').click();
+ await page.locator('#session-size').selectOption('100');await check('100 kelimelik oturum',await page.locator('.session-heading').innerText().then(t=>t.includes('1 / 100')));
+ await page.locator('#search').fill('house');await page.waitForFunction(()=>document.querySelector('#word-image')?.naturalWidth>0,{timeout:22000});
+ await check('Yeni isimde internetten arama görseli',await page.locator('.image-credit').innerText().then(t=>t.includes('arama görseli')));
+ await page.setViewportSize({width:390,height:844});await check('Telefon ön yüzünde yatay taşma yok',await page.evaluate(()=>document.documentElement.scrollWidth===innerWidth));
+ await page.locator('#flip').click();await check('Telefon arka yüzünde yatay taşma yok',await page.evaluate(()=>document.documentElement.scrollWidth===innerWidth));
+ await page.setViewportSize({width:1440,height:1100});await page.locator('.sidebar [data-nav="study"]').click();
+ for(let i=1;i<=6;i++){await page.locator('#band').selectOption(String(i));await page.locator('#flip').click();await page.waitForFunction(()=>{const p=document.querySelectorAll('.language-block p');return p.length===3&&![...p].some(n=>n.textContent.includes('yükleniyor'));});}
+ await page.locator('#band').selectOption('all');await page.locator('#search').fill('house');
+ await page.waitForFunction(async()=>{const keys=await caches.keys();const name=keys.find(k=>k.startsWith('aklikubbe-packs-v2-'));if(!name)return false;const c=await caches.open(name);return (await c.keys()).some(r=>r.url.endsWith('en-02.json'));});
+ const cached=await page.evaluate(async()=>{const result=[];for(const name of await caches.keys()){const cache=await caches.open(name);result.push({name,urls:(await cache.keys()).map(r=>r.url)});}return result;});
+ await check('Çevrimdışı anlam paketi önbelleği en fazla 6',cached.filter(c=>c.name.startsWith('aklikubbe-packs-v2-')).every(c=>c.urls.length<=6));
+ await check('Uzak görseller ve API yanıtları önbelleğe girmez',cached.every(c=>c.urls.every(url=>url.startsWith('http://localhost:4173/'))));
+ await page.context().setOffline(true);await page.reload();await page.locator('.sidebar [data-nav="catalog"]').click();
+ await check('3000 kelimelik arama dizini çevrimdışı açılır',await page.locator('.collection-header').innerText().then(t=>t.startsWith('3000 kelime')));
+ await page.locator('.sidebar [data-nav="saved"]').click();await check('Eski ve yeni cümleler birlikte çevrimdışı okunur',await page.locator('.saved-card').count()===2);
+ await page.context().setOffline(false);
+ // A failing catalogue must not overwrite the user's existing learning records.
+ const before=await page.evaluate(()=>localStorage.getItem('aklikubbe.v1'));
+ const faultContext=await page.context().browser().newContext({serviceWorkers:'block'});
+ const faultPage=await faultContext.newPage();
+ await faultPage.goto('http://localhost:4173/');await faultPage.waitForSelector('#deck');
+ await faultPage.evaluate(value=>localStorage.setItem('aklikubbe.v1',value),before);
+ await faultPage.route('**/data/catalog-index.json',route=>route.fulfill({status:503,body:'Unavailable'}));
+ await faultPage.reload();await faultPage.waitForSelector('#reload-catalog');
+ await check('Katalog yükleme hatasında kayıtlar değişmez',await faultPage.evaluate(value=>localStorage.getItem('aklikubbe.v1')===value,before));
+ await faultContext.close();
+ await page.evaluate(()=>localStorage.removeItem('aklikubbe.v1'));await page.reload();
+ return results;
+}

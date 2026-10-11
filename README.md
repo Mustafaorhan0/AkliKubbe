@@ -2,6 +2,8 @@
 
 PC ve telefonda çalışan, Türkçe / İngilizce / Almanca kelime kartları. Görseller Wikimedia Commons'tan, örnek cümleler Tatoeba'dan alınır. Öğrenme kayıtları ve kaydedilen metinler cihazdaki tarayıcıda kalır. Çalışan ürün yapay zekâ kullanmaz.
 
+Varsayılan paket **Günlük İngilizce · 3000**: OpenSubtitles 2018 / FrequencyWords sıklık verisi ve Kaikki / Wiktionary açıklamaları. Türkçe/Almanca kapsamı eksiksiz değildir; kaynaklar ve veri lisansı [data/README.md](./data/README.md) içinde açıklanır. Eski 30 görsel kart ayrı paket olarak korunur.
+
 ## Çalıştırma
 
 Node.js 22 veya üzeri:
@@ -36,16 +38,18 @@ Depoyu Vercel'e bağla. Framework preset: **Other**, build: `npm run build`, out
 ## Depolama ve kaynaklar
 
 - `localStorage`: kelime durumları ve kullanıcının kaydettiği cümleler. PC/telefon otomatik eşitlenmez; Ayarlar'daki JSON yedeğiyle taşınır.
-- Service worker: yalnızca arayüz dosyaları ve uygulama ikonları. Uzak kelime görselleri veya API cevapları burada saklanmaz.
+- Service worker: arayüz dosyaları, uygulama ikonları, 3000 kelimelik arama dizini ve en fazla altı anlam paketi. Uzak kelime görselleri veya API cevapları burada saklanmaz.
 - Tarayıcı kendi HTTP önbelleğinde geçici görseller tutabilir; web uygulaması bunu tamamen engelleyemez.
-- 30 kelimelik başlangıç kataloğu ve kısa açıklamalar yereldir. Görsel dosya adları seçilmiş referanslardır; uygulama bu dosyaları paketlemez.
+- 3000 kelimelik dizin yüklenir; açıklamalar 100 kelimelik 30 paketten ihtiyaç oldukça alınır. İlk 30 kartın açıklamaları ayrıca korunur. Görsel dosya adları seçilmiş referanslardır; uygulama bu dosyaları paketlemez.
 - Görseller: [Wikimedia Commons](https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia/technical). Her dosyanın atıf/lisansı gösterilir.
 - Örnekler: [Tatoeba API](https://api.tatoeba.org/openapi). Doğrudan çeviriler ve cümle katkıda bulunanları korunur. Otomatik kelime filtresi tam anlam doğrulaması sağlamaz.
 
 ## Doğrulama
 
-`npm test`: 8 temel veri ve kaynak süzme testi. `tests/browser-checks.js`: yerel uygulamaya karşı Playwright araçlarıyla çalıştırılan 20 canlı tarayıcı kontrolü; PC/mobil görünüm, kaydırma, kayıt, tekrar, yedek ve çevrimdışı açılış. Bu dosya bağımsız bir Playwright CLI paketi değildir; test tarayıcısındaki yerel kayıtları sıfırlar. Kullanıcı tarayıcısında çalıştırma.
+`npm test`: 16 veri, kaynak süzme, katalog, kimlik koruma, sayfalama ve paket belleği testi. `tests/browser-checks.js`: yerel uygulamaya karşı Playwright araçlarıyla çalıştırılan 20 canlı tarayıcı kontrolü; PC/mobil görünüm, kaydırma, kayıt, tekrar, yedek ve çevrimdışı açılış. `tests/browser-catalog.js` yeni katalog için 25 ek kontrol içerir. Bu dosyalar bağımsız bir Playwright CLI paketi değildir; test tarayıcısındaki yerel kayıtları sıfırlar. Kullanıcı tarayıcısında çalıştırma.
 
-İsteğe bağlı kaynak kontrolü: `node scripts/check-sources.mjs`. Görsellerin API'de bulunmasını ve örnek bir kelime kümesinin canlı cümle kapsamını kontrol eder; görselleri indirmez.
+Katalog üretimi: `python3 scripts/build-catalog.py --source-dir /tmp/aklikubbe-data --download`. Büyük girdiler yalnızca geliştirme sırasında kullanılır; uygulamaya paketlenmez.
+
+İsteğe bağlı ilk görsel kart kaynak kontrolü: `node scripts/check-sources.mjs`. Görsellerin API'de bulunmasını ve örnek bir kelime kümesinin canlı cümle kapsamını kontrol eder; görselleri indirmez.
 
 Google Play paketi bu sürüme dahil değildir. Tam kapsam ve sınırlar [proje.md](./proje.md) içindedir.

@@ -25,39 +25,42 @@ Vercel için statik yayın ayarları da hazırdır. CORS izni olmayan başka bir
 
 Kaynaklar: [GitHub Pages açıklaması](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [MediaWiki tarayıcılar arası erişim](https://www.mediawiki.org/wiki/API:Cross-site_requests/en), [Tatoeba API belgeleri](https://api.tatoeba.org/openapi).
 
-## 3. Mevcut başlangıç sürümü
+## 3. Mevcut sürüm — 3000 kelimelik katalog
 
-- 30 Türkçe kelime; yiyecek, doğa, hayvanlar ve günlük yaşam kategorileri.
-- PC'de yan gezinme; telefonda alttaki gezinme çubuğu.
-- Ön yüzde Türkçe kelime ve internetten yüklenen görsel.
-- Kartı çevirmeyle TR/EN/DE karşılıkları ve kısa açıklamaları.
-- Kartın arkasına geçildiğinde canlı örnek cümle sorgusu.
-- Sağa kaydırma / “Biliyorum”; sola kaydırma / “Bilmiyorum”.
-- Bilinenler ve bilinmeyenler listeleri, kutular arasında taşıma.
-- Bilinmeyenleri veya bilinenleri çalışmak için tekrar oturumları.
-- Son sınıflandırmayı geri alma, kart atlama, kategori ve kelime araması.
-- Cümle ve mevcut çevirilerini kaydetme, başka örneğe geçme, kayıt silme.
-- Yedeği JSON olarak dışa ve içe aktarma.
-- Uygulama kabuğu ve kayıtlı metinler için çevrimdışı erişim.
-- PWA manifesti, kurulum bilgisi ve uygulama ikonları.
+12 Ekim 2026 güncellemesiyle varsayılan paket **Günlük İngilizce · 3000** oldu. Liste [FrequencyWords / OpenSubtitles 2018](https://github.com/hermitdave/FrequencyWords) altyazı sıklık verisinden hazırlanır. Sözlük açıklamaları [Kaikki / Wiktionary](https://kaikki.org/) verilerinden alınır; çalışma sırasında yapay zekâ veya makine çevirisi çağrısı yoktur.
 
-Bu 30 kelime, bütün akışı denemek için başlangıç kataloğudur. İlk plandaki 500–1.000 kelime henüz eklenmedi. Canlı örnekleri tam olan, uygun görselleri kontrol edilmiş kelimelerle katalog genişletilecek.
+Bu, evrensel ya da 2026 yılına ait kesin konuşma sıralaması değildir. Sözcük parçaları, belirgin kişi adları ve uygun İngilizce sözlük kaydı bulunmayan girdiler çıkarıldıktan sonra ilk 3000 kayıt seçildi. Son kayıt kaynak korpusta **3228. sıradadır**. `rank` paket sırası, `sourceRank` kaynak sırasıdır. Çekimli yüzey biçimleri ayrı kayıtlar olabilir; liste 3000 ayrı kök sözcük olarak sunulmaz.
+
+- 3000 benzersiz İngilizce kayıt; 1–500, 501–1000, …, 2501–3000 sıklık grupları.
+- İngilizce, Türkçe veya Almanca ön yüz seçimi; varsayılan İngilizce.
+- Sözcük türü ve üç dilde arama; katalog/liste ekranlarında 50 satırlık sayfalama.
+- 25, 50 veya 100 kelimelik çalışma oturumları.
+- Bilinenler, bilinmeyenler, tekrar, geri alma ve cümle defteri.
+- “TR + DE mevcut” filtresi; kısa karşılıkları olmayan kelimeleri filtreleme.
+- Kaynak açıklamaları: İngilizce **3000**, Türkçe **2111**, Almanca **2164** kayıtta mevcut. Kısa karşılık kapsamı açıklama kapsamından farklıdır; eksikler açıkça gösterilir.
+- Önceki 30 kart, görselleri ve kimlikleriyle **Görsel başlangıç · 30** paketinde korunur. İki pakette ortak kelimeler aynı öğrenme kimliğini kullanır.
+
+Türkçe/Almanca kapsamı eksiksiz değildir. Bu sürüm 3000 kelimenin tamamının insan tarafından anlam ve görsel açısından doğrulandığı iddiasında bulunmaz. Ortak çeviri grupları mümkün olduğunda korunur; bağımsız dil sözlüklerinden alınan anlamlar birebir aynı kullanım olmayabilir. Eksik karşılıklar uydurulmaz.
+
+Veri uyarlaması ve atıflar: `data/README.md`, `data/CC-BY-SA-4.0.txt`. Kaynak dosyaların SHA-256 değerleri, kapsam raporu ve yapılan eleme `docs/catalog-build.json` içindedir. Yeniden üretme betiği `scripts/build-catalog.py`.
 
 ## 4. Kartlar ve öğrenme durumu
 
 Kartın önünde Türkçe kelime, kategori ve görsel bulunur. Görselin eser sahibi, kaynağı ve lisansı gösterilir. Kaynak yanıt vermezse kart görselsiz kullanılabilir.
 
-Kartın arkasında her dilin kelime karşılığı ve kısa açıklaması yer alır. Almanca isimlerde artikel bulunur. Şimdiki kısa açıklamalar uygulama için hazırlanmış **küçük metin kataloğundan** gelir; canlı sözlükten çekildiği iddia edilmez. Sözlük kaynağını anlık ayrıştırma önceki plandaki bir araştırma konusudur ve bu sürümde uygulanmadı.
+Kartın arkasında her dilin kelime karşılığı ve kısa açıklaması yer alır. Almanca isimlerde artikel bulunur. Yeni pakette açıklamalar kaynak sözlüklerden çıkarılmış, gerektiğinde indirilen küçük metin paketlerinden gelir. Önceki 30 kartın özgün açıklamaları korunur. Her kart açılışında büyük bir sözlük indirilmez veya canlı sözlük taraması yapıldığı iddia edilmez. Kaynaklarda bulunan bazı yaygın dil bilgisi/çekim sorunları açık editoryal kısa etiketlerle düzenlendi; bu etiketler `data/editorial-core.json` içinde tutulur.
 
-Örnek cümleler Tatoeba'dan internet üzerinden gelir. Üç dilin tamamı bulunamazsa eksik dil açıkça belirtilir. Aynı cümlenin kaynakta doğrudan bağlı olmayan çevirileri veya birbirinden bağımsız örnekler eşdeğer çeviriler gibi gösterilmez.
+Örnek cümleler Tatoeba'dan internet üzerinden gelir. Üç dilin tamamı bulunamazsa eksik dil açıkça belirtilir. Aynı cümlenin kaynakta doğrudan bağlı olmayan çevirileri veya birbirinden bağımsız örnekler eşdeğer çeviriler gibi gösterilmez. Yeni pakette Türkçe gibi öznenin düşebildiği dillerin geçerli çevirileri sadece hedef kelime açıkça geçmiyor diye elenmez.
 
 Bir kelime/anlam kimliğinin durumu `yeni`, `bilinen` veya `bilinmeyen`dir. Aynı kimlik iki kutuda birden yer almaz. Oturumdaki kartlar başlangıçta belirlenir; sınıflandırma değiştiğinde sıradaki kart atlanmaz.
 
 ## 5. İnternetten görsel alma
 
-Başlangıç kataloğunda yalnızca kelimeye bağlı **Commons dosya adı** vardır; görselin kendisi yoktur. Kart açılınca MediaWiki API'ye istek gider, küçük boyutlu görsel URL'si ve atıf/lisans verileri alınır. Görsel uzak URL'den gösterilir.
+İlk 30 kartta kelimeye bağlı seçilmiş Commons dosya adı bulunur; görselin kendisi bulunmaz. Kart açılınca MediaWiki API'ye istek gider, küçük boyutlu görsel URL'si ve atıf/lisans verileri alınır.
 
-Bu sürüm serbest Google araması veya ilk arama sonucunu seçme yöntemini kullanmaz. Anlamı daha iyi korumak için başlangıçta seçilmiş dosya adını canlı çözer. Yeni görsel seçeneklerini otomatik araştırma ayrı bir geliştirme olabilir; mevcut davranış bununla karıştırılmamalıdır.
+Yeni pakette uygun isimler için Commons'ta başlık/kelime araması yapılır. En fazla beş arama sonucu değerlendirilir; izin verilen görsel türü ve lisans bilgileriyle bir uzak görsel gösterilir. Arama sonucunun kartın anlamını kesin olarak temsil ettiği garanti edilmez ve görsel “arama görseli” olarak belirtilir. Google HTML kazıması kullanılmaz.
+
+Dil bilgisi sözcükleri, fiiller, sıfatlar ve belirgin soyut kelimeler genellikle görselsiz metin kartlarıyla çalışılır. “the”, “would” gibi sözcüklere rastgele fotoğraf bağlanmaz. Her kelimenin doğru bir fotoğrafla temsil edilebileceği varsayılmaz.
 
 Commons dosyalarının lisansları ayrı ayrı değerlendirilir. Kullanım koşulları doğrulanamayan görsel gösterilmez. Atıf bilgisi HTML olarak çalıştırılmaz; düz metin olarak gösterilir. Görsel URL'leri HTTPS ve beklenen sağlayıcı alan adıyla sınırlandırılır.
 
@@ -67,7 +70,7 @@ Kaynaklar: [Commons teknik yeniden kullanım rehberi](https://commons.wikimedia.
 
 Tatoeba API v1 üzerinden İngilizce kelime aranır; Türkçe ve Almanca doğrudan bağlı çevirileri istenir. Onaylanmamış cümleler elenir. CC BY 2.0 FR ve CC0 1.0 dışındaki lisanslar alınmaz.
 
-Gelen sonuçlarda hedef kelimelerin ilgili dillerde geçmesi kontrol edilir. Basit Türkçe ekleri ve Almanca/İngilizce çoğul biçimleri için sınırlı normalleştirme uygulanır. En az bir hedef dil çevirisiyle eşleşmeyen örnek gösterilmez. Üç dilde mevcut örnekler öne alınır.
+İlk 30 anlam kartında gelen sonuçlarda hedef kelimelerin ilgili dillerde geçmesi kontrol edilir. Yeni sıklık paketinde İngilizce hedef sözcük kontrol edilir; lisanslı, onaylanmış ve doğrudan bağlı Türkçe/Almanca çeviriler alınır. Basit Türkçe ekleri ve Almanca/İngilizce çoğul biçimleri için sınırlı normalleştirme uygulanır. Yeni pakette bir hedef dil çevirisi yoksa mevcut İngilizce örnek gösterilebilir; eksik diller açıkça belirtilir. Bağlı çeviri olmayan ayrı cümleler otomatik olarak birleştirilmez. Üç dilde mevcut örnekler öne alınır.
 
 **Bu filtre tam anlam doğrulaması değildir.** Örneğin çok anlamlı bir kelimenin yanlış kullanımı hâlâ geçebilir. Dilsel kalite için insan incelemesi, daha dar anlam katalogları ve kaynak cümlelerinin doğrulanması gerekir. Eksik içerik üretilmez veya otomatik çevrilmez.
 
@@ -91,7 +94,7 @@ Yedek dosyaları en fazla 2 MB ve 2.000 cümle grubuyla sınırlıdır. Şema, k
 
 ## 8. Görsel depolamama sınırı
 
-Uygulama görselleri kendi `localStorage`, IndexedDB veya Cache Storage alanına yazmaz. Service worker yalnızca uygulamanın küçük HTML/CSS/JS kabuğunu ve ikonlarını çevrimdışı erişim için saklar. API yanıtları ve uzak kelime görselleri bu listeye dahil edilmez.
+Uygulama görselleri kendi `localStorage`, IndexedDB veya Cache Storage alanına yazmaz. Service worker arayüzü, ikonları ve yaklaşık 638 KB boyutundaki 3000 kelimelik arama dizinini çevrimdışı erişim için saklar. Sözlük açıklamaları 100 kelimelik 30 dosyaya ayrılır; bu dosyalar ihtiyaç oldukça yüklenir, bellekte ve çevrimdışı depoda en fazla altı paket tutulur. API yanıtları ve uzak kelime görselleri bu listeye dahil edilmez. İlk açılışta 30 anlam paketinin tamamı indirilmez; geliştirirken kullanılan büyük kaynak sözlükleri kullanıcıya veya GitHub deposuna taşınmaz.
 
 Buna karşın **web uygulaması tarayıcının kendi HTTP/disk önbelleğinin tamamını kontrol edemez**. Uzak sunucunun başlıklarına göre tarayıcı geçici görsel önbelleği oluşturabilir. “Cihazda hiçbir koşulda görsel baytı kalmaz” garantisi web için verilemez. Önceki Android planındaki disk önbelleğini tam kapatma koşulu bu nedenle web sürümünde revize edilmiştir.
 
@@ -102,11 +105,13 @@ Görsel arşivinin uygulamayla birlikte indirilmemesi ve uygulama tarafından s�
 | Katman | Uygulanan çözüm |
 | --- | --- |
 | Arayüz | HTML, CSS ve ES module JavaScript; çalışma zamanı bağımlılığı yok |
-| Katalog | `src/data.js`; 30 kelime, karşılıklar, kısa açıklamalar, uzak dosya adları |
+| Katalog | `data/catalog-index.json`; 3000 kayıt ve arama alanları; `src/legacy-data.js` eski 30 kart |
+| Anlam paketleri | `data/packs/en-01.json` … `en-30.json`; 100 kayıttan oluşan, gerektiğinde yüklenen açıklamalar |
+| Katalog erişimi | `src/catalog.js`; kaynak doğrulama, dil seçimi, eski kimlikler ve sınırlı paket belleği |
 | İçerik erişimi | `src/content.js`; Commons ve Tatoeba için HTTPS/CORS istekleri |
 | Kullanıcı verisi | `src/storage.js`; sürümlü ve doğrulanan yerel JSON kayıtları |
 | Etkileşim | `src/app.js`; kartlar, kutular, kaydırma, tekrar, defter, yedekler |
-| Çevrimdışı | `sw.js`; yalnızca uygulama kabuğu için sınırlı dosya listesi |
+| Çevrimdışı | `sw.js`; uygulama kabuğu/dizin ve en fazla altı anlam paketi; dış görseller ve API cevapları hariç |
 | Yerel önizleme | `npm run dev`; varsayılan port 4173 |
 | Yayın paketi | `npm run build`; `dist/` klasörü |
 | GitHub Pages | `main` dalı, kök dizin `/`; `.nojekyll` ile doğrudan statik yayın |
@@ -116,20 +121,21 @@ Dosya bağlantıları göreli oluşturuldu; GitHub Pages'in `/depo-adi/` alt diz
 
 ## 10. Çevrimdışı ve hata davranışı
 
-İlk çevrimiçi açılışta uygulama kabuğu hazırlandıktan sonra kelime listesi, kısa açıklamalar, öğrenme kutuları ve kaydedilmiş cümleler çevrimdışı kullanılabilir. Yeni görseller ve canlı örnekler için internet gerekir.
+İlk çevrimiçi açılışta uygulama kabuğu hazırlandıktan sonra 3000 kelimelik arama dizini, öğrenme kutuları ve kaydedilmiş cümleler çevrimdışı kullanılabilir. Eski 30 kartın açıklamaları da kullanılabilir. Yeni sözlük açıklamaları ancak ilgili anlam paketi hâlâ sınırlı önbellekteyse çevrimdışı açılır. Önbelleğe alınmamış anlamlar için açık hata mesajı gösterilir; kullanıcı kayıtları silinmez. Yeni görseller ve canlı örnekler için internet gerekir.
 
 Görsel/cümle hataları diğer öğrenme işlemlerini engellemez. Zaman aşımı, bulunamayan içerik, HTTP hataları ve internet kesintisi mesajla gösterilir. Kart değiştirilince eski isteklerin yeni karta yazması engellenir. Kaynaklara tüm katalog için otomatik toplu indirme yapılmaz.
 
 ## 11. Doğrulama ve mevcut sınırlar
 
-- Yerel kayıt, cümle kopyası, yedek doğrulama, depolama hatası, doğrudan çeviri seçimi, kelime eşleştirme, URL güvenliği ve katalog kimlikleri için 8 otomatik test geçti.
+- Yerel kayıt, cümle kopyası, yedek doğrulama, kaynak filtreleri, 3000 benzersiz kayıt, sıklık sırası, eski kimliklerin korunması, sayfalama, eksik çeviri davranışı ve altı paketlik bellek sınırı için 16 otomatik test geçti.
 - 30 görsel referansının tamamı API üzerinden bulundu; uygulamanın kabul ettiği lisanslar doğrulandı. Altı kelimelik cümle örnekleminde canlı çeviri grupları bulundu; sonuçlar `docs/source-check.json` içindedir.
 - GitHub Pages benzeri `/AkliKubbe/` alt dizininden statik paket, canlı içerik, manifest ve service worker kapsamı yerelde doğrulandı.
 - Canlı elma görseli ve üç dilli Tatoeba cümlesi tarayıcıda doğrulandı.
-- PC ve 390 px telefon görünümünde 20 tarayıcı kontrolü geçti: sınıflandırma, geri alma, kalıcılık, taşıma, tekrar, arama, kaydırma, defter, yedek işlemleri, bozuk yedek, çevrimdışı yeniden açılış ve uzak görsellerin uygulama önbelleğine alınmaması.
+- PC ve 390 px telefon görünümünde ilk akışın 20 tarayıcı kontrolü geçti: sınıflandırma, geri alma, kalıcılık, taşıma, tekrar, arama, kaydırma, defter, yedek işlemleri, bozuk yedek, çevrimdışı yeniden açılış ve uzak görsellerin uygulama önbelleğine alınmaması.
 - 12 Ekim 2026: `https://mustafaorhan0.github.io/AkliKubbe/` HTTPS adresi HTTP 200 ile açıldı. Canlı görsel, üç dilli Tatoeba örneği, 390 px görünümde taşma olmaması ve service worker kapsamı yayın üzerinde doğrulandı.
+- Yeni katalog için ek 25 tarayıcı kontrolü geçti: dil seçimi, 3000 kayıt, 500 kelimelik gruplar, 50 satırlık sayfalama, 100 kelimelik oturum, kaynak arama görseli, eski kayıtların korunması, altı paketlik çevrimdışı sınır, çevrimdışı dizin/defter ve katalog hatasında kayıtların değişmemesi.
 - Gerçek Android/iPhone cihazları, tüm tarayıcılar ve mağaza paketi henüz test edilmedi. Mobil kontroller tarayıcıda boyut benzetimiyle yapıldı.
-- İlk planın 100 kelimelik kapsam araştırması ve 500–1.000 kelimelik katalog tamamlanmadı.
+- Sıklık kataloğu 3000 kayda ulaştı. İngilizce sözlük açıklamaları tamdır; Türkçe/Almanca açıklamalar ve tüm kelimelerin görsel/anlam açısından insan incelemesi tamamlanmış değildir.
 - Her kelimede üç dilde canlı cümle ve her eşleşmede doğru anlam garanti edilmez.
 - Google Play paketi, hesap/eşitleme, bildirimler ve aralıklı tekrar henüz uygulanmadı.
 

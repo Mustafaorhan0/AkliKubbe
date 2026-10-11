@@ -1,0 +1,206 @@
+{
+  "you": [
+    "sen / siz",
+    "du / ihr / Sie"
+  ],
+  "i": [
+    "ben",
+    "ich"
+  ],
+  "the": [
+    "belirli artikel",
+    "der / die / das"
+  ],
+  "a": [
+    "bir",
+    "ein / eine"
+  ],
+  "an": [
+    "bir",
+    "ein / eine"
+  ],
+  "to": [
+    "-e / -a; yönelme",
+    "zu"
+  ],
+  "it": [
+    "o (cansız veya nötr)",
+    "es"
+  ],
+  "and": [
+    "ve",
+    "und"
+  ],
+  "that": [
+    "o / şu",
+    "das / jener"
+  ],
+  "of": [
+    "-in / -ın; aitlik",
+    "von"
+  ],
+  "is": [
+    "-dır / -dir; olmak",
+    "ist"
+  ],
+  "in": [
+    "içinde",
+    "in"
+  ],
+  "what": [
+    "ne",
+    "was"
+  ],
+  "we": [
+    "biz",
+    "wir"
+  ],
+  "me": [
+    "beni / bana",
+    "mich / mir"
+  ],
+  "this": [
+    "bu",
+    "dieser / diese / dieses"
+  ],
+  "he": [
+    "o (erkek)",
+    "er"
+  ],
+  "she": [
+    "o (kadın)",
+    "sie"
+  ],
+  "for": [
+    "için",
+    "für"
+  ],
+  "my": [
+    "benim",
+    "mein"
+  ],
+  "on": [
+    "üzerinde",
+    "auf"
+  ],
+  "have": [
+    "sahip olmak",
+    "haben"
+  ],
+  "your": [
+    "senin / sizin",
+    "dein / euer / Ihr"
+  ],
+  "do": [
+    "yapmak",
+    "tun"
+  ],
+  "was": [
+    "-dı / -di; olmak (geçmiş)",
+    "war"
+  ],
+  "no": [
+    "hayır",
+    "nein"
+  ],
+  "not": [
+    "değil / olumsuzluk",
+    "nicht"
+  ],
+  "be": [
+    "olmak",
+    "sein"
+  ],
+  "are": [
+    "olmak (şimdiki zaman)",
+    "bist / sind / seid"
+  ],
+  "can": [
+    "-ebilmek / -abilmek",
+    "können"
+  ],
+  "with": [
+    "ile",
+    "mit"
+  ],
+  "but": [
+    "ama / fakat",
+    "aber"
+  ],
+  "all": [
+    "hepsi / tüm",
+    "alle"
+  ],
+  "just": [
+    "sadece / yalnızca",
+    "nur"
+  ],
+  "there": [
+    "orada",
+    "dort"
+  ],
+  "here": [
+    "burada",
+    "hier"
+  ],
+  "they": [
+    "onlar",
+    "sie"
+  ],
+  "yes": [
+    "evet",
+    "ja"
+  ],
+  "so": [
+    "böyle / bu yüzden",
+    "so / also"
+  ],
+  "would": [
+    "-erdi / -ardı; koşul veya geçmiş",
+    "würde"
+  ],
+  "will": [
+    "-ecek / -acak; gelecek",
+    "werden"
+  ],
+  "if": [
+    "eğer",
+    "wenn"
+  ],
+  "who": [
+    "kim",
+    "wer"
+  ],
+  "why": [
+    "neden",
+    "warum"
+  ],
+  "when": [
+    "ne zaman",
+    "wann"
+  ],
+  "our": [
+    "bizim",
+    "unser"
+  ],
+  "them": [
+    "onları / onlara",
+    "sie / ihnen"
+  ],
+  "his": [
+    "onun (erkek)",
+    "sein"
+  ],
+  "her": [
+    "onu / onun (kadın)",
+    "sie / ihr"
+  ],
+  "us": [
+    "bizi / bize",
+    "uns"
+  ],
+  "their": [
+    "onların",
+    "ihr"
+  ]
+}

@@ -6,6 +6,7 @@ async (page) => {
   await page.evaluate(()=>localStorage.removeItem('aklikubbe.v1'));
   await page.reload();
   await page.setViewportSize({width:1440,height:1000});
+  await page.locator('#deck').selectOption('legacy');
   await page.waitForFunction(()=>document.querySelector('#word-image')?.naturalWidth>0,{timeout:22000});
   await check('Canlı Wikimedia görseli',await page.locator('#word-image').count()===1);
   await page.locator('#flip').click();
@@ -21,6 +22,7 @@ async (page) => {
   await check('Sınıflandırmayı geri alma',await page.locator('.word-title h2').innerText()==='elma' && await page.evaluate(()=>!JSON.parse(localStorage.getItem('aklikubbe.v1')).learning.Q89));
   await page.locator('#known').click();
   await page.reload();
+  await page.locator('#deck').selectOption('legacy');
   await check('Yeniden açılışta kayıt korunur',await page.evaluate(()=>JSON.parse(localStorage.getItem('aklikubbe.v1')).learning.Q89.status==='known'));
   await page.locator('.sidebar [data-nav="known"]').click();
   await check('Bilinenleri listeleme',await page.locator('.list-word').count()===1);
@@ -51,6 +53,7 @@ async (page) => {
   await page.evaluate(()=>{window.confirm=()=>true;});
   await page.locator('#reset').click();
   await page.locator('.mobile-nav [data-nav="study"]').click();
+  await page.locator('#deck').selectOption('legacy');
   await page.locator('#search').fill('kedi');
   await check('Türkçe kelime araması',await page.locator('.word-title h2').innerText()==='kedi');
   await page.locator('#search').fill('');
